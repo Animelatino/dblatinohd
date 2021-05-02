@@ -1,29 +1,34 @@
 import React, { PureComponent } from 'react';
-import Head from 'next/head';
+import ReactPlayer from 'react-player';
+
+import styles from '../styles/Player.module.css';
 
 class VideoPlayer extends PureComponent {
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            startVideo: false
+        }
     }
-    
-    componentDidMount(){
-        const { data } = this.props;
-        const script = document.createElement("script");
-        script.text = `const player = new Playerjs({ id: "playerDiv", file: "${data?.file}", poster: null, autoplay: true, width: '100%', height: '100%', preload:'auto' });`;
-        script.async = true;
-        const div = document.getElementById('script');
-        div.appendChild(script);
+
+    async onStart (){
+        this.setState({
+            startVideo: true
+        })
     }
     
     render() {
+        const { data } = this.props;
+        const { startVideo } = this.state;
         return (
             <>
-                <Head>
-                    <script src="/js/player.js"></script>
-                </Head>
-                <div id="playerDiv"></div>
-                <div id="script"></div>
+                <ReactPlayer onStart={() => this.onStart()} className={styles.container} url={data?.file} playing width='100%' height='100%' controls/>
+                {!startVideo && (
+                    <div className={styles.message}>
+                        <p>Cargando video...</p>
+                    </div>
+                )}
             </>
         )
     }

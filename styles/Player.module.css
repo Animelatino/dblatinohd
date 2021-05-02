@@ -1,0 +1,27 @@
+.container {
+    height: 0;
+    padding-bottom: 56%;
+    background: #000;
+}
+.container video {
+    position: absolute;
+    top: 0;
+}
+
+.message {
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+.message p {
+    font-size: 1.5rem;
+    font-family: 'Netflix Sans Bold';
+    color: rgb(255 255 255);
+}

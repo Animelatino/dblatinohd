@@ -22,7 +22,6 @@ export async function getServerSideProps(context) {
     const { id } = context.params;
     const res = await api.get(`stream/beta/${id}`);
     const file = res.data[0].file;
-    console.log(file)
     return {
         props: {
             data: {

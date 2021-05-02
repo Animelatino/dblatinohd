@@ -59,7 +59,8 @@ body {
     font-family: 'Netflix Sans Regular';
     background-color: var(--background);
     height: 100vh;
-    color: var(--primary-text)
+    color: var(--primary-text);
+    height: 100%;
 }
 
 :root {
