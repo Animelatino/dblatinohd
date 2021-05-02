@@ -1,0 +1,75 @@
+.title {
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--box);
+    margin-bottom: 1rem;
+}
+
+.videoContainer {
+    background-color: var(--box);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.player {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background-color: var(--background);
+}
+
+.player .iframe {
+    position: absolute !important;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.navCaps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--box);
+}
+
+.navCaps .nav {
+    max-width: 240px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.navCaps .nav .subTitleE, 
+.navCaps .nav .titleE {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 75%;
+}
+
+.navCaps .nav .titleE {
+    font-size: 100%;
+    color: var(--tertiary-text);
+}
+
+.navCaps .navList .list {
+    margin: 0 1.5rem;
+}
+
+.navCaps .navList .list {
+    font-size: 30px;
+}
+
+@media (max-width: 660px) {
+    .title {
+        padding: .5rem;
+        font-size: 80%;
+    }
+    .navCaps .nav {
+        font-size: 85%;
+    }
+    .navCaps .nav .titleE b, .navCaps .nav .subTitleE {
+        display: none;
+    }
+}

@@ -1,0 +1,77 @@
+.infoAnime {
+    display: flex;
+    padding: 1rem;
+    background-color: var(--box);
+    margin-bottom: 1rem;
+}
+
+.infoAnime .posterAnime {
+    position: relative;
+    max-width: 240px;
+    min-width: 240px;
+}
+
+.infoAnime .posterAnime > div:first-child {
+    padding-bottom: 85%;
+}
+
+.fin {
+    background-color: var(--danger) !important;
+    color: var(--white);
+}
+
+.emi {
+    background-color: var(--success) !important;
+    color: var(--white);
+}
+
+.infoAnime .posterAnime .statusAnime {
+    padding: .8rem 1rem;
+    border-radius: .6rem;
+    background-color: var(--background);
+    text-align: center;
+    font-family: 'Netflix Sans Bold';
+}
+
+.infoAnime .detailAnime {
+    padding: 1.5rem;
+}
+
+.infoAnime .detailAnime .title {
+    font-family: 'Netflix Sans Bold';
+}
+
+.contentAnime {
+    padding: 1rem;
+    background-color: var(--box);
+    margin-bottom: 1rem;
+}
+
+.contentAnime .lepisodes {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+}
+
+@media (max-width: 960px) {
+    .contentAnime .lepisodes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 660px) {
+    .infoAnime {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contentAnime .lepisodes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 425px) {
+    .contentAnime .lepisodes {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
