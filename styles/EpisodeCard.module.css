@@ -8,6 +8,10 @@
     height: auto;
 } 
 
+.container > div:first-child > div:first-child {
+    padding-top: 56.5% !important;
+}
+
 .container:focus {
     outline: none;
 }
