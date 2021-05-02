@@ -14,6 +14,6 @@ module.exports = withNextEnv({
         IMGPATH: 'https://www.themoviedb.org/t/p/',
         URL: 'https://www.dblatinohd.com/',
         NEXT_PUBLIC_GA_ID: 'G-5GCY71NP2R',
-        APIURL: 'http://api.animelatinohd.com/api/'
+        APIURL: 'https://api.dblatinohd.com/api/'
     }
 });
