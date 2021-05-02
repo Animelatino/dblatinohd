@@ -13,6 +13,7 @@ module.exports = withNextEnv({
         SITENAME: 'DBLATINOHD',
         IMGPATH: 'https://www.themoviedb.org/t/p/',
         URL: 'https://www.dblatinohd.com/',
-        NEXT_PUBLIC_GA_ID: 'G-5GCY71NP2R'
+        NEXT_PUBLIC_GA_ID: 'G-5GCY71NP2R',
+        APIURL: 'http://api.animelatinohd.com/api/'
     }
 });
