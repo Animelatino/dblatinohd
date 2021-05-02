@@ -47,8 +47,6 @@ class Index extends PureComponent {
     }
 }
 
-export default Index
-
 export async function getStaticProps() {
     const res = await api.get(`releases`);
     return {
@@ -58,3 +56,5 @@ export async function getStaticProps() {
         revalidate: 1
     }
 }
+
+export default Index
