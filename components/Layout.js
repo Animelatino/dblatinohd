@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 
 import NavNavigation from './NavNavigation';
 import BottomNavigation from './BottomNavigation';
+import DetectAdBlock from './DetectAdblock';
 
 import styles from '../styles/Layout.module.css';
+
 
 class Layout extends PureComponent {
 
@@ -15,6 +17,7 @@ class Layout extends PureComponent {
         return (
             <>
                 <NavNavigation/>
+                <DetectAdBlock/>
                 <div className={styles.container}>
                     {this.props.children}
                 </div>
