@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { AnimatePresence } from "framer-motion";
-
+import { ChakraProvider } from "@chakra-ui/react";
 import * as gtag from '../lib/ga';
 
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
+
     const router = useRouter();
     useEffect(() => {
         const handleRouteChange = (url) => {
@@ -17,10 +17,11 @@ function MyApp({ Component, pageProps }) {
             router.events.off('routeChangeComplete', handleRouteChange)
         }
     }, [router.events]);
+
     return (
-        <AnimatePresence exitBeforeEnter>
+        <ChakraProvider>
             <Component {...pageProps} />
-        </AnimatePresence>
+        </ChakraProvider>
     )
 }
 

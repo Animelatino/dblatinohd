@@ -8,8 +8,8 @@ const withNextEnv = nextEnv();
 module.exports = withNextEnv({
     images: {
         domains: ['www.themoviedb.org'],
-        deviceSizes: [40, 53, 140, 162, 182, 192, 236, 250, 280],
-        imageSizes: [40, 53, 140, 162, 182, 192, 236, 250, 280],
+        deviceSizes: [425, 768, 1024, 1440, 1920],
+        imageSizes: [300, 500, 780, 1280],
     },
     env: {
         SITENAME: 'DBLATINOHD',

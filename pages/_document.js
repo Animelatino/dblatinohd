@@ -1,4 +1,6 @@
+import { ColorModeScript } from "@chakra-ui/react";
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import theme from "../lib/theme";
 
 import { GA_TRACKING_ID } from '../lib/ga';
 
@@ -16,6 +18,7 @@ class MyDocument extends Document {
                     <script async src="https://arc.io/widget.min.js#5NgTk75z"></script>
                 </Head>
                 <body>
+                    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
                     <Main />
                     <NextScript />
                 </body>

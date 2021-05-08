@@ -1,97 +1,87 @@
 import React, { PureComponent } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import Iframe from 'react-iframe';
-import { motion } from 'framer-motion';
-import { Tab, Tabs, TabList, TabPanel, resetIdCounter } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-
 import { api } from '../../../lib/api';
 import { slugAnime, slugEpisode, getImage } from '../../../lib/urls';
-import Layout from '../../../components/Layout';
+import LayoutApp from '../../../components/LayoutApp';
 
-import styles from '../../../styles/Episode.module.css';
+import { Container, Box, Text } from '@chakra-ui/layout';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, AspectRatio, Link  } from "@chakra-ui/react";
 
 
 class number extends PureComponent {
 
     constructor(props) {
         super(props);
-        resetIdCounter();
     }
 
     render() {
         const { data } = this.props;
         return (
-            <motion.div  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} >
-                <Layout>
-                    <Head>
-                        <title>{`Ver ${data?.anime?.name} Episodio ${data?.number} en Español Latino en HD Online • ${process.env.SITENAME}`}</title>
-                        <meta name="description" content={`Anime ${data?.anime?.name} capitulo ${data?.number} Sub Español Latino, ver y descargar ${data?.anime?.name} capítulo ${data?.number} por mega y mediafire gratis en hd sin ninguna limitación`} />
-                        <link rel="canonical" href={slugEpisode(data?.anime?.slug,data?.number)} />
-                        <meta name="og:title" content={`Ver ${data?.anime?.name} Episodio ${data?.number} en Español Latino en HD Online • ${process.env.SITENAME}`} />
-                        <meta name="og:description" content={`Anime ${data?.anime?.name} capitulo ${data?.number} Sub Español Latino, ver y descargar ${data?.anime?.name} capítulo ${data?.number} por mega y mediafire gratis en hd sin ninguna limitación`} />
-                        <meta name="og:url" content={slugEpisode(data?.anime?.slug,data?.number)} />
-                        <meta name="og:locale" content="es_LA" />
-                        <meta name="og:type" content="video.episode" />
-                        <meta name="og:image" content={getImage('w780',data?.image ? data?.image : data?.anime?.banner)} />
-                        <meta property="og:image:width" content="552" />
-                        <meta property="og:image:height" content="310" />
-                        <meta itemProp="image" content={getImage('w780',data?.image ? data?.image : data?.anime?.banner)} />
-                    </Head>
-                    <div className={styles.title}>
-                        <h2>{`${data?.anime?.name} Episodio ${data?.number}`}</h2>
-                        <p>{data?.name}</p>
-                    </div>
+            <LayoutApp>
+                <Head>
+                    <title>{`Ver ${data?.anime?.name} Episodio ${data?.number} en Español Latino en HD Online • ${process.env.SITENAME}`}</title>
+                    <meta name="description" content={`Anime ${data?.anime?.name} capitulo ${data?.number} Sub Español Latino, ver y descargar ${data?.anime?.name} capítulo ${data?.number} por mega y mediafire gratis en hd sin ninguna limitación`} />
+                    <link rel="canonical" href={slugEpisode(data?.anime?.slug,data?.number)} />
+                    <meta name="og:title" content={`Ver ${data?.anime?.name} Episodio ${data?.number} en Español Latino en HD Online • ${process.env.SITENAME}`} />
+                    <meta name="og:description" content={`Anime ${data?.anime?.name} capitulo ${data?.number} Sub Español Latino, ver y descargar ${data?.anime?.name} capítulo ${data?.number} por mega y mediafire gratis en hd sin ninguna limitación`} />
+                    <meta name="og:url" content={slugEpisode(data?.anime?.slug,data?.number)} />
+                    <meta name="og:locale" content="es_LA" />
+                    <meta name="og:type" content="video.episode" />
+                    <meta name="og:image" content={getImage('w780',data?.image ? data?.image : data?.anime?.banner)} />
+                    <meta property="og:image:width" content="552" />
+                    <meta property="og:image:height" content="310" />
+                    <meta itemProp="image" content={getImage('w780',data?.image ? data?.image : data?.anime?.banner)} />
+                </Head>
+                <Container paddingTop="2rem" paddingBottom="2rem" maxW="container.xl">
+                    <Box textAlign="center">
+                        <Text fontSize="2xl" marginBottom="0.5rem" color="white" textTransform="uppercase" fontWeight="bold">{`${data?.anime?.name} Episodio ${data?.number}`}</Text>
+                        <Text fontSize="md" color="gray.400">{data?.name}</Text>
+                    </Box>
                     {Object.values(data?.players)?.length > 0 && (
-                    <div className={styles.videoContainer}>
-                        <Tabs>
+                    <Box marginTop="1rem">
+                        <Tabs isFitted variant="enclosed">
                             <TabList>
                                 {Object.values(data?.players)?.map((player,idx) => 
                                     Object.values(player)?.map((play,idx) => 
-                                    <Tab>{`${play?.languaje == 0 ? 'Sub' : 'Lat'} - ${play?.server?.title}`}</Tab>
+                                    <Tab rounded="none" _focus="none" color="gray.400" _selected={{ color: "white", bg: "gray.900" }}>{`${play?.languaje == 0 ? 'Sub' : 'Lat'} - ${play?.server?.title}`}</Tab>
                                 ))}
                             </TabList>
+                            <TabPanels>
                             {Object.values(data?.players)?.map((player,idx) => 
                                 Object.values(player)?.map((play,idx) => 
-                                <TabPanel>
-                                    <div className={styles.player}>
-                                        <Iframe className={styles.iframe} url={`/stream/${play?.server?.title?.toLowerCase()}/${Buffer.from(play?.code).toString('base64')}`} width="auto" height="auto" display="initial" position="relative" frameBorder="0"/>
-                                    </div>
+                                <TabPanel padding="0" bg="gray.900">
+                                    <AspectRatio ratio={16/9}>
+                                        <iframe src={`/stream/${play?.server?.title?.toLowerCase()}/${Buffer.from(play?.code).toString('base64')}`} allowFullScreen />
+                                    </AspectRatio>
                                 </TabPanel>
                             ))}
+                            </TabPanels>
                         </Tabs>
-                    </div>
+                    </Box>
                     )}
-                    <div className={styles.navCaps}>
-                        <div className={styles.nav}>
+                    <Box bg="gray.900" padding="1rem" rounded="md" marginTop="1rem" display="flex" alignItems="center" justifyContent="space-between">
+                        <Box maxW="30%">
                         {data?.anterior && (
-                            <Link href={slugEpisode(data?.anime?.slug,data?.anterior?.number)}>
-                                <a>
-                                    <p className={styles.titleE}><b>{data?.anime?.name}</b> {`Episodio ${data?.anterior?.number}`}</p>
-                                    <p className={styles.subTitleE}>{data?.anterior?.name}</p>
-                                </a>
+                            <Link _focus="none" href={slugEpisode(data?.anime?.slug,data?.anterior?.number)}>
+                                <Text color="white">{'< Anterior'}</Text>
                             </Link>
                         )}
-                        </div>
-                        <div className={styles.navList}>
-                            <Link href={slugAnime(data?.anime?.slug)}>
-                                <p className={styles.list}>≡</p>
-                            </Link>
-                        </div>
-                        <div className={styles.nav}>
+                        </Box>
+                        <Box maxW="30%">
+                        <Link _focus="none" href={slugAnime(data?.anime?.slug)}>
+                            <Text color="white" fontWeight="bold">{'Lista'}</Text>
+                        </Link>
+                        </Box>
+                        <Box maxW="30%">
                         {data?.siguiente && (
-                            <Link href={slugEpisode(data?.anime?.slug,data?.siguiente?.number)}>
-                                <a>
-                                    <p className={styles.titleE}><b>{data?.anime?.name}</b> {`Episodio ${data?.siguiente?.number}`}</p>
-                                    <p className={styles.subTitleE}>{data?.siguiente?.name}</p>
-                                </a>
+                            <Link _focus="none" href={slugEpisode(data?.anime?.slug,data?.siguiente?.number)}>
+                                <Text color="white">{'Siguiente >'}</Text>
                             </Link>
                         )}
-                        </div>
-                    </div>
-                </Layout>
-            </motion.div>
+                        </Box>
+                    </Box>
+                </Container>
+            </LayoutApp>
         )
     }
 }
@@ -120,8 +110,7 @@ export async function getServerSideProps(context) {
         })
         return {
             props: { 
-                data: res.data,
-                params: context.params
+                data: res.data
             }
         }
     } catch (error) {

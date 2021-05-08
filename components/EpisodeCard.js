@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { Box, Image, Text, Link } from "@chakra-ui/react";
 
 import { slugEpisode, getImage } from '../lib/urls';
-
-import styles from '../styles/EpisodeCard.module.css';
 
 class EpisodeCard extends PureComponent {
 
@@ -15,26 +12,14 @@ class EpisodeCard extends PureComponent {
     render() {
         const { data, title, banner, slug } = this.props;
         return (
-            <Link href={slugEpisode(slug ? slug : data?.anime?.slug, data?.number)}>
-                <a className={styles.container}>
-                    <Image className={styles.image}
-                        src={getImage('w300',data?.banner ? data?.banner : (banner ? banner : data?.anime?.banner))}
-                        alt={`${data?.anime?.name} Episodio ${data?.number} Español Latino HD`}
-                        width={"auto"}
-                        height={"auto"}
-                        quality={95}
-                        loading={"lazy"}
-                        sizes="(max-width: 375px) 22vw,
-							   (max-width: 660px) 15vw,
-							   (max-width: 1024px) 11.5vw,
-							   (max-width: 1280px) 11vw,
-							   (max-width: 800px) 192px"
-                    />
-                    <div className={styles.info}>
-                        <p className={styles.title}>{`${title ? title : data?.anime?.name} Episodio ${data?.number}`}</p>
-                        <p className={styles.desc}>{data?.name}</p>
-                    </div>
-                </a>
+            <Link _focus="none" href={slugEpisode((slug ? slug : data?.anime?.slug), data?.number)}>
+                <Box bg="gray.900" rounded="lg" overflow="hidden">
+                    <Image w="100%" src={getImage('w227_and_h127_bestv2',data?.banner ? data?.banner : (banner ? banner : data?.anime?.banner))} fallbackSrc="https://via.placeholder.com/227x127" />
+                    <Box padding="0.5rem" textAlign="center">
+                        <Text color="white">{`${title ? title : data?.anime?.name} Eps. ${data?.number}`}</Text>
+                        <Text color="gray.400" noOfLines={2}>{data?.name}</Text>
+                    </Box>
+                </Box>
             </Link>
         )
     }

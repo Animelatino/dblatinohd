@@ -1,33 +1,39 @@
 import React, { PureComponent } from 'react';
-import Link from 'next/link';
-import { menuItems } from '../helpers/Functions';
+import { Box, Heading, Flex, Text, Link } from "@chakra-ui/react";
 
-import styles from '../styles/NavNavigation.module.css';
+import { menuItems } from '../helpers/Functions';
+import DrawerNavigation from './DrawerNavigation';
 
 class NavNavigation extends PureComponent {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            show: false
+        };
     }
 
+    handleToggle = () => {
+        this.setState({ show: !this.state.show });
+    };
+
     render() {
+        const { show } = this.state;
         return (
-            <div className={styles.container}>
-                <div className={styles.menu}>
-                    <Link href={'/'}>
-                        <a className={`${styles.item} ${styles.logo}`}>{process?.env?.SITENAME}</a>
-                    </Link>
-                    {menuItems()?.map((item, i) => {
-                        return (
-                            <Link key={i} href={item?.link}>
-                                <a alt={item?.name} className={styles.item}>
-                                    <svg viewBox="0 0 24 24" className={styles.n} dangerouslySetInnerHTML={{ __html: item?.icon }}></svg>
-                                    {item?.name}
-                                </a>
-                            </Link>
-                        )})
-                    }
-                </div> 
-            </div>
+            <Flex display="flex" as="nav" align="center" justify="space-between" wrap="wrap" padding="1rem" bg="gray.900" color="white" {...this.props}>
+                <DrawerNavigation/>
+                <Flex align="center" mr={5}>
+                    <Heading color="white" as="h1" size="lg" letterSpacing={"-.1rem"}>
+                        <Link _hover="none" _focus="none" href="/">
+                            {process.env.SITENAME}
+                        </Link>
+                    </Heading>
+                </Flex>
+                <Box display={{ base: "none", md: "flex" }} width={{ sm: "full", md: "auto" }} alignItems="center" flexGrow={1}>
+                    {menuItems()?.map((item,idx) => 
+                        <Link _hover="none" _focus="none" marginRight="1.5rem" key={idx} href={item.link}>{item.name}</Link>
+                    )}
+                </Box>
+            </Flex>
         )
     }
 }

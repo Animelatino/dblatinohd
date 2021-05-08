@@ -1,7 +1,5 @@
 import React, { Component} from 'react';
-import Modal from 'react-modal';
-
-import styles from '../styles/Modal.module.css';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, Text } from "@chakra-ui/react"
 
 class DetectAdBlock extends Component {
     constructor(props) {
@@ -19,20 +17,15 @@ class DetectAdBlock extends Component {
 
     noticeContentJSX() {
         return (
-            <Modal
-                isOpen={true}
-                style={{overlay: {zIndex: 1000}}}
-                className={styles.modal}>
-                    <div className={styles.message}>
-                        <h2>¡ADBLOCK DETECTADO!</h2>
-                        <div className={styles.contentMessage}>
-                            <img src="https://i.imgur.com/VNzB22V.png" height={180}/>
-                            <div className={styles.info}>
-                                <p>{process.env.SITENAME.toUpperCase()} somos un sitio que gusta brindar un buen servicio por tanto no usamos publicidad, si se usa sera muy poca como banner que no afecten tu experiencia.</p>
-                                <p>Por tanto te agradeceriamos muchos que desactivaras tu bloqueador de anuncios, asi podremos seguir brindandote un buen servicio.</p>
-                            </div>
-                        </div>
-                    </div>
+            <Modal motionPreset="slideInBottom" isOpen={true}>
+                <ModalOverlay />
+                <ModalContent pb={5}>
+                    <ModalHeader>Adblock Detectado</ModalHeader>
+                    <ModalBody>
+                        <Text>Nuestro sitio que gusta esta libre de anuncios, pero usamos una network para costear Hosting y Dominio.</Text>
+                        <Text>Por tanto te agradeceriamos muchos que desactivaras tu bloqueador de anuncios, asi podremos seguir brindandote un buen servicio.</Text>
+                    </ModalBody>
+                </ModalContent>
             </Modal>
         );
     }
